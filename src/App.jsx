@@ -6,15 +6,19 @@ function App() {
   const [renderedHTML, setRenderedHTML] = useState('');
   const [isDragging, setIsDragging] = useState(false);
   const [fileName, setFileName] = useState('');
+  const [isLoading, setIsLoading] = useState(false); // 🔥 new loading state
 
   const handleFile = async (file) => {
     const formData = new FormData();
     formData.append('file', file);
 
-    // Strip .xlsx extension
     const originalName = file.name;
     const cleanName = originalName.endsWith('.xlsx') ? originalName.slice(0, -5) : originalName;
     setFileName(cleanName);
+
+    setIsLoading(true); // ⏳ Start loading
+    setHtmlOutput('');
+    setRenderedHTML('');
 
     try {
       const response = await fetch("https://xpx-backend.onrender.com/upload", {
@@ -31,6 +35,8 @@ function App() {
       }
     } catch (error) {
       setHtmlOutput('Error uploading file');
+    } finally {
+      setIsLoading(false); // ✅ Stop loading
     }
   };
 
@@ -96,9 +102,17 @@ function App() {
         />
       </div>
 
+      {isLoading && (
+        <div className="loading-indicator">
+          <div className="spin-circle" />
+          <p>Processing your file, please wait...</p>
+       
+        </div>
+      )}
+
       <div className="rendered-output" dangerouslySetInnerHTML={{ __html: renderedHTML }} />
 
-      {renderedHTML && (
+      {renderedHTML && !isLoading && (
         <>
           <button className="convert-button" onClick={handleCopy}>Copy HTML</button>
           <pre className="code-output">{htmlOutput}</pre>
