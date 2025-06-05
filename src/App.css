@@ -1,0 +1,46 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  padding: 2rem;
+  background-color: #f4f4f4;
+  min-height: 100vh;
+}
+
+h1 {
+  color: #333;
+}
+
+.upload-area {
+  border: 2px dashed #999;
+  padding: 2rem;
+  margin: 1rem auto;
+  width: 80%;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.upload-area.dragging {
+  background-color: #e0f7fa;
+  border-color: #00796b;
+}
+
+.code-output {
+  text-align: left;
+  white-space: pre-wrap;
+  background: #222;
+  color: #0f0;
+  padding: 1rem;
+  margin-top: 2rem;
+  font-family: monospace;
+  border-radius: 8px;
+  max-width: 90%;
+  overflow-x: auto;
+}
+
+
+.convert-button {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  cursor: pointer;
+}
