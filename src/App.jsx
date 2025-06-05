@@ -31,10 +31,13 @@ function App() {
         setHtmlOutput(result.html);
         setRenderedHTML(result.html);
       } else {
+        console.log('error')
         setHtmlOutput(result.error || 'Unknown error');
       }
     } catch (error) {
       setHtmlOutput('Error uploading file');
+      console.log('error', error)  
+      alert(`Failed to Fetch. This File is in use. Choose another file, or close the file that's open and try again`)    
     } finally {
       setIsLoading(false); // ✅ Stop loading
     }
